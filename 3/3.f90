@@ -1,17 +1,17 @@
         program problem3
         implicit none
-        real*8 n,check
-        integer*4 :: d
+        real :: check
+        integer(kind=8) :: n,d
         logical :: isprime
 
-        n = 600851475143.
+        n = 600851475143_8
         print*,"n = ",n
-        d=floor(sqrt(n))
+        d=floor(sqrt(real(n)))
         if (mod(d,2).eq.0) then
             d = d-1
         endif
         do while (d>2)
-            if (mod(n,real(d)).eq.0) then
+            if (mod(n,d).eq.0) then
                 print*,"n,d,div = ",n,d,n/real(d)
                 if (isprime(real(d)).eqv..true.) then
                     print*, "largest prime factor = ",d
