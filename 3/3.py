@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import math
+import sys
 
 def isprime(n):
     if (n%2==0) or (n%3)==0:
@@ -24,6 +25,7 @@ if (d%2==0): d=d-1
 while d>2:
     if (n%d==0) and (isprime(d)):
         print "largest prime factor = %d\n" % (d)
+        sys.exit()
     if (d%2000==0):
         print "d = %d\n" % (d)
     d=d-2
