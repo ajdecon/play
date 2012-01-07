@@ -1,12 +1,26 @@
         program problem3
         implicit none
-        integer*4 :: d,n,limit
-        real :: check
+        real*8 n,check
+        integer*4 :: d
         logical :: isprime
 
-        do n=1,40,1
-            if (isprime(n).eqv..true.) then
-                print*,"Prime number!",n
+        n = 600851475143.
+        print*,"n = ",n
+        d=floor(sqrt(n))
+        if (mod(d,2).eq.0) then
+            d = d-1
+        endif
+        do while (d>2)
+            if (mod(n,real(d)).eq.0) then
+                print*,"n,d,div = ",n,d,n/real(d)
+                if (isprime(real(d)).eqv..true.) then
+                    print*, "largest prime factor = ",d
+                    stop
+                endif
+            endif
+            d = d-2
+            if (mod(d,2000).eq.0) then
+                print*,"d = ",d
             endif
         enddo
 
@@ -14,11 +28,10 @@
 
         logical function isprime (n)
             implicit none
-            integer*4 :: n
-            integer*4 :: k,c1,c2
+            real :: n,k,c1,c2
             real :: limit
             ! Do a quick check for 2 or 3
-            if ((mod(n,2).eq.0).or.(mod(n,3).eq.0)) then
+            if ((mod(n,2.).eq.0).or.(mod(n,3.).eq.0)) then
                 isprime=.false.
                 return
             endif
