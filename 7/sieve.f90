@@ -21,10 +21,12 @@ enddo
 
 ! Cycle through possible primes, mark their multiples as non-prime
 do i=3,num,2
+    ! Already marked? skip it
     if (sieve(i).eqv..false.) then
         cycle
     endif
 
+    ! Mark multiples as non-prime
     do j=2*i,num,i
         sieve(j) = .false.
     enddo
