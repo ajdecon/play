@@ -2,9 +2,9 @@
 program problem7
 implicit none
 integer (kind=4) :: num
-parameter (num = 105000)
+parameter (num = 2000000)
 logical, dimension(num) :: sieve
-integer (kind=4) :: c,i,j
+integer (kind=4) :: c,i,j,total
 
 ! Initialize sieve to true
 do i=1,num,1
@@ -33,16 +33,15 @@ do i=3,num,2
 
 enddo
 
-! count primes
-c = 0
+! sum all primes
+total = 0
 do i=1,num,1
     if (sieve(i).eqv..true.) then
-        c = c+1
-        print*, "prime ",c," at ",i
+        total = total + i
     endif
 enddo
 
-print*,"Number of primes is ",c
+print*,"Total of primes below 2,000,000 is ",total
 
 end program
 
