@@ -1,10 +1,10 @@
 ! Sieve of Eratosthenes
 program problem7
 implicit none
-integer (kind=4) :: num
+integer (kind=8) :: num
 parameter (num = 2000000)
 logical, dimension(num) :: sieve
-integer (kind=4) :: c,i,j,total
+integer (kind=8) :: c,i,j,total
 
 ! Initialize sieve to true
 do i=1,num,1
