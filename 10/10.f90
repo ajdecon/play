@@ -27,7 +27,7 @@ do i=3,num,2
     endif
 
     ! Mark multiples as non-prime
-    do j=2*i,num,i
+    do j=i*i,num,i
         sieve(j) = .false.
     enddo
 
