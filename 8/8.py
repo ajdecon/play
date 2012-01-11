@@ -2,17 +2,13 @@
 
 # Get the number to check
 f = open("check-number.txt","r");
-longnum = f.readline()
-nums = []
+x = f.readline()
 
+maxnum = 0
 for i in range(1000-4):
-    nums.append(longnum[i:i+5])
+    prod = int(x[i])*int(x[i+1])*int(x[i+2])*int(x[i+3])*int(x[i+4])
+    if prod>maxnum:
+        maxnum=prod
 
-count = len(nums)
-max = 0
-for i in range(count-1):
-    now = int(nums[i])*int(nums[i+1])
-    if now>max:
-        max = now
+print maxnum
 
-print max
