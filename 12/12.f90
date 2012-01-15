@@ -1,6 +1,6 @@
 program problem12
-    integer (kind=8) :: triangle,numfactors
-    integer (kind=8) :: NF,i,test,t,best
+    integer (kind=4) :: triangle,numfactors
+    integer (kind=4) :: NF,i,test,t,best
     ! Generate triangle numbers and print how many factors they have
     NF = 500
     test = 0
@@ -17,8 +17,8 @@ program problem12
 end program
 
 function triangle(n)
-    integer (kind=8) :: triangle
-    integer (kind=8) :: n,i,total
+    integer (kind=4) :: triangle
+    integer (kind=4) :: n,i,total
     total = 0
     do i=1,n,1
         total = total + i
@@ -28,8 +28,8 @@ function triangle(n)
 end function triangle
 
 function numfactors(n)
-    integer (kind=8) :: numfactors
-    integer (kind=8) :: n,i,c
+    integer (kind=4) :: numfactors
+    integer (kind=4) :: n,i,c
     c=0
     do i=1,floor(sqrt(real(n))),1
         if (mod(n,i).eq.0) then
