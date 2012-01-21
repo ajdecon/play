@@ -9,9 +9,9 @@ program problem21
     parameter(maxnum = 9999)
     logical, dimension(maxnum) :: sieve
     
-    ! Initialize sieve to true
+    ! Initialize sieve to false
     do a=1,maxnum,1
-        sieve(a)=.true.
+        sieve(a)=.false.
     enddo
 
     ! Loop through all numbers up to maxnum.
@@ -22,19 +22,14 @@ program problem21
     !  3b) else, both numbers are false.
     do a=1,maxnum,1
         ! Skip numbers we've already marked
-        if (sieve(a).eqv..false.) then
+        if (sieve(a).eqv..true.) then
             cycle
         endif
-        ! Mark sieve as false if the numbers aren't amicable.
-        b = d(a)
-        if (d(b)/=a) then
-            sieve(a)=.false.
+        b=d(a)
+        if (d(b)==a .and. b/=a) then
+            sieve(a)=.true.
             if (b<=maxnum) then
-                sieve(b)=.false.
-            endif
-        else
-            if (b==a) then
-                sieve(a)=.false.
+                sieve(b)=.true.
             endif
         endif
     enddo
@@ -45,10 +40,7 @@ program problem21
     ! Sum all amicable numbers in the sieve
     do a=1,maxnum,1
         if (sieve(a).eqv..true.) then
-            print*,a,"is amicable"
-            print*,"d(a) = ",d(a),"and is",sieve(d(a))
             total = total + a
-            print*,"total is",total
             ct= ct+1
         else
             cf = cf+1
