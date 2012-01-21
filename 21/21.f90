@@ -5,6 +5,7 @@
 program problem21
     implicit none
     integer :: d, maxnum, a, b, total
+    integer :: ct,cf
     parameter(maxnum = 9999)
     logical, dimension(maxnum) :: sieve
     
@@ -31,17 +32,31 @@ program problem21
             if (b<=maxnum) then
                 sieve(b)=.false.
             endif
+        else
+            if (b==a) then
+                sieve(a)=.false.
+            endif
         endif
     enddo
 
     total = 0
+    ct = 0
+    cf = 0
     ! Sum all amicable numbers in the sieve
     do a=1,maxnum,1
         if (sieve(a).eqv..true.) then
+            print*,a,"is amicable"
+            print*,"d(a) = ",d(a),"and is",sieve(d(a))
             total = total + a
+            print*,"total is",total
+            ct= ct+1
+        else
+            cf = cf+1
         endif
     enddo
     print*, "Total is",total
+    print*,"Number of amicable numbers",ct
+    print*,"Not amicable?",cf
 end program
 
 ! Find the number of proper divisors of x
