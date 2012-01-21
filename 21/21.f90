@@ -14,12 +14,6 @@ program problem21
         sieve(a)=.false.
     enddo
 
-    ! Loop through all numbers up to maxnum.
-    ! For each number...
-    !  1) Calculate a=d(i). p
-    !  2) Calculate b=d(a)
-    !  3a) 
-    !  3b) else, both numbers are false.
     do a=1,maxnum,1
         ! Skip numbers we've already marked
         if (sieve(a).eqv..true.) then
