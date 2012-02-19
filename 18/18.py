@@ -10,3 +10,5 @@ rows = []
 for line in data:
     rows.append([int(x) for x in line.split()])
 
+total_rows = len(rows)
+print total_rows
