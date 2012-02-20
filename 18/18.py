@@ -23,6 +23,7 @@ paths = [ [0] ]
 path_sums = [rows[0][0]]
 total_rows = len(rows)
 current_max = 0
+max_path_count = 0
 
 for r in range(14):
     print "******** Level %d" % (r)
@@ -58,7 +59,11 @@ for r in range(14):
     paths = new_paths
     path_sums = new_path_sums
     current_max = max(path_sums)
+    if len(paths)>max_path_count:
+        max_path_count = len(paths)
 
 print "Max is %d" % (current_max)
 print "Path is:"
 print paths[path_sums.index(current_max)]
+print "Number of paths left: %d" % (len(paths))
+print "Max number of paths at any iteration: %d" % (max_path_count)
