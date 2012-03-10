@@ -6,9 +6,9 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/types.h>
-#include <sys/sockets.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
-#include <netinet/inet.h>
+#include <arpa/inet.h>
 
 #define BUFSIZE 8096
 #define ERROR 42
@@ -28,7 +28,7 @@ struct {
     { "gz", "image/gz" },
     { "htm", "text/html" },
     { "html", "text/html"},
-    { "txt", "text/plain" }
+    { "txt", "text/plain" },
     {0,0} };
 
 /* logging function */
@@ -129,9 +129,10 @@ void web(int fd, int hit) {
     (void)write(fd,buffer,strlen(buffer));
 
     /* send file in BUFSIZE blocks */
-    while( (ret=read(file_fd,buffer,BUFSIZE))>=0) {
+    while( (ret=read(file_fd,buffer,BUFSIZE))>0) {
         (void)write(fd,buffer,ret);
     }
+    log(LOG,"SEND finished","",hit);
 
 #ifdef LINUX
     sleep(1);
@@ -150,7 +151,8 @@ main(int argc, char **argv) {
     static struct sockaddr_in serv_addr;
 
     if (argc<3 || argc>3 || !strcmp(argv[1],"-?")){
-        (void)printf("hint: nweb port-number top-directory");
+        (void)printf("hint: nweb port-number top-directory\n");
+        exit(0);
     }
 
     if( !strncmp(argv[2],"/"   ,2 ) || !strncmp(argv[2],"/etc", 5 ) ||
@@ -201,7 +203,7 @@ main(int argc, char **argv) {
 
     for (hit; ; hit++) {
         length = sizeof(cli_addr);
-        if ((socketfd=accept(listenfd, (struct sockaddr *)&cli_addr, length)) < 0) {
+        if ((socketfd=accept(listenfd, (struct sockaddr *)&cli_addr, &length)) < 0) {
             log(ERROR, "system call", "accept", 0);
         }
 
