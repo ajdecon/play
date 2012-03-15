@@ -16,8 +16,8 @@ void incOnHost(float *a, int N) {
 // Device Kernel = increment each element by 1
 __global__ void incOnDevice(float *a, int N) {
     int idx = (blockIdx.x * blockDim.x) + threadIdx.x;
-    if ( (idx<N) && (idx>0) )
-        a[idx] = a[idx] + a[idx-1];
+    if ( (idx<N) && (idx>1) )
+        a[idx] = a[idx] + a[idx-2];
 }
 
 // Main thread
