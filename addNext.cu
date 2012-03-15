@@ -17,14 +17,14 @@ void incOnHost(float *a, int N) {
 __global__ void incOnDevice(float *a, int N) {
     int idx = (blockIdx.x * blockDim.x) + threadIdx.x;
     if ( (idx<N) && (idx>1) )
-        a[idx] = a[idx] + a[idx-2];
+        a[idx] = a[idx] + a[idx-1];
 }
 
 // Main thread
 int main(void) {
     float *a_h, *b_h;
     float *a_d;
-    int i, N=10;
+    int i, N=48;
     size_t size = N*sizeof(float);
 
     a_h = (float *)malloc(size);
