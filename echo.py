@@ -15,6 +15,7 @@ while 1:
     client, address = s.accept()
     data = client.recv(size)
     if data:
+        print "Received message from %s: %s" % (address,data)
         client.send(data)
     client.close()
 
