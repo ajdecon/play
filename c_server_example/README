@@ -1,0 +1,7 @@
+nweb is an extremely simple web server outlined in an 
+IBM DeveloperWorks article by Nigel Griffiths. See
+http://www.ibm.com/developerworks/systems/library/es-nweb/index.html.
+
+I'm going to step through writing it (well, typing it) myself as an
+intro to some simple C network programming. Committing it to a repo
+on BitBucket for my own future reference.
