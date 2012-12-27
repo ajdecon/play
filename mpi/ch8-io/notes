@@ -1,0 +1,7 @@
+MPI imposes no requirements on I/O; left up to any given implementation.
+All implementations allow at least one process access to stdout and stderr.
+Not all, but many, give access to stdin.
+We'll write some functions to organize I/O.
+
+MPI provides "attribute caching" to store information which should be available to all
+processes.

@@ -1,0 +1,4 @@
+All my previous work on MPI has been ad-hoc and whatever was required to get a program working.
+
+Which is fine, and normal, but I'd like something a little more systematic. So I'm going to work
+through the examples and exercises in Pacheco's "Parallel Programming with MPI".

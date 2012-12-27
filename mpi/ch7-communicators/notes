@@ -1,0 +1,51 @@
+Matrix multiplication:
+
+If A = a_ij and B=b_ij are square matrices of order n, then C=cij=AB is 
+obtained via:
+
+c_ij = a_i0 b_oj + a_i1 b1j + ... + a_i,n-1 b_n-1,j
+
+c_ij = Sum(x=0 to n-1) a_ix b_xj
+
+
+Fox's algorithm:
+
+Assume matrices have order n, and processes p = n^2
+Checkerboard mapping: assign a_ij, b_ij, and c_ij to process i*n+j or, 
+loosely, process (i,j).  Fox's algorithm proceeds in n stages, one for
+each term in the row-column dot-product.
+
+On process (i,j):
+
+Stage 0: c_ij = a_ii * b_ij
+Stage 1: c_ij = c_ij + a_i,i+1 * b_i+1,j
+Stage k: c_ij = c_ij + a_i,i+k * b_i+k,j
+
+Problem with that is, we can't just add k because we'll go outside the bounds
+of the matrix.  So we use a modified k:
+
+k* = (i+k) mod n
+c_ij = c_ij + a_i,k* * b_k*,j
+
+Problems are present here. We haven't specified how to handle interprocess 
+communication, and this is a special case where p = n^2. That would be a lot
+of processes! We'll get eaten up in communications overhead.
+
+To use fewer processes, the obvious answer is to use submatrices. Then we use
+
+C_ij = A_ii * B_ij + A_i,i+1 * B_i+1,j + ...
+
+Outline Fox's alforithm:
+    q = sqrt(p);
+    dest = ( (i-1) mod q, j);
+    source = ( (i+1) mod q, j);
+    for (stage = 0; stage < q; stage++) {
+        k_bar = (i + stage) mod q;
+    a   Broadcast A[i,k_bar] across process row i;
+    b   C[i,j] = C[i,j] + A[i,k_bar] * B[k_bar,j];
+    c   Sent B[k_bar,j] to dest; Recv B[(k_bar+1) mod q, j] from source;
+    }
+
+Note that in steps a and c it would be easier if we could define "communication
+universes" first using the row, then the column. This is what communicators are 
+for.
