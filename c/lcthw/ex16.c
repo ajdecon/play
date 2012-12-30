@@ -53,6 +53,7 @@ int main(int argc, char **argv) {
 
     Person_destroy(joe);
     Person_destroy(adam);
+    Person_print(NULL);
 
     return 0;
 }
