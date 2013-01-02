@@ -1,7 +1,7 @@
 # Modified from exercise 28 of Zed Shaw's "Learn C the Hard Way", 2012
 
 CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
-LIBS=-ldl $(OPTLIBS)
+LDLIBS=-ldl $(OPTLIBS)
 PREFIX=?/usr/local
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
