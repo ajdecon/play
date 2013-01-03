@@ -2,11 +2,12 @@
 #include <lcthw/list_algos.h>
 #include <assert.h>
 #include <string.h>
+#undef NDEBUG
 
 char *values[] = {"XXXXX", "1234", "abcd", "xjvef", "NDSS"};
 #define NUM_VALUES 5
 
-List create_words() {
+List *create_words() {
     int i = 0;
     List *words = List_create();
     for (i=0; i<NUM_VALUES; i++) {
@@ -15,10 +16,12 @@ List create_words() {
     return words;
 }
 
+
+
 int is_sorted(List *words) {
     LIST_FOREACH(words, first, next, cur) {
         if (cur->next && (strcmp(cur->value, cur->next->value) > 0)) {
-            debug("%s %s", (char *)cur->value, (char *)cur->next->value);
+            debug("Unsorted! %s %s", (char *)cur->value, (char *)cur->next->value);
             return 0;
         }
 
@@ -48,9 +51,11 @@ char *test_bubble_sort() {
 }
 
 char *test_merge_sort() {
+    log_info("Beginning merge sort test...");
     List *words = create_words();
-
     List *res = List_merge_sort(words, (List_compare)strcmp);
+    log_info("first merge sort complete");
+
     mu_assert(is_sorted(res), "Words are not sorted after merge sort");
 
     List *res2 = List_merge_sort(words, (List_compare)strcmp);
