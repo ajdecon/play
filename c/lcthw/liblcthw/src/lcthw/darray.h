@@ -10,7 +10,7 @@ typedef struct DArray {
     int max;
     size_t element_size;
     size_t expand_rate;
-    void *contents;
+    void **contents;
 } DArray;
 
 DArray *DArray_create(size_t element_size, size_t initial_max);
@@ -27,6 +27,8 @@ void DArray_clear_destroy(DArray *array);
 #define DArray_end(A) ((A)->end)
 #define DArray_count(A) DArray_end(A)
 #define DArray_max(A) ((A)->max)
+
+#define DEFAULT_EXPAND_RATE 300
 
 static inline void DArray_set(DArray *array, int i, void *el) {
     check(i < array->max, "darray attempt to set past max");
@@ -49,7 +51,7 @@ static inline void *DArray_remove(DArray *array, int i) {
     return el;
 }
 
-static inline void *Darray_new(DArray *array) {
+static inline void *DArray_new(DArray *array) {
     check(array->element_size > 0, "Can't use DArray_new on 0 size darrays");
     return calloc(1, array->element_size);
 error:

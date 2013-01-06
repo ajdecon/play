@@ -74,7 +74,7 @@ char *test_expand_contract() {
 
 char *test_push_pop() {
     int i = 0;
-    for(i=0, i<1000, i++) {
+    for(i=0; i<1000; i++) {
         int *val = DArray_new(array);
         *val = i*333;
         DArray_push(array, val);
@@ -82,7 +82,7 @@ char *test_push_pop() {
 
     mu_assert(array->max == 1201, "Wrong max size");
 
-    for(i=0, i<1000, i++) {
+    for(i=999; i>=0; i--) {
         int *val = DArray_pop(array);
         mu_assert(val != NULL, "Should not be NULL");
         mu_assert(*val == i*333, "Wrong value");
@@ -100,7 +100,7 @@ char *all_tests() {
     mu_run_test(test_set);
     mu_run_test(test_get);
     mu_run_test(test_remove);
-    mu_run_rest(test_expand_contract);
+    mu_run_test(test_expand_contract);
     mu_run_test(test_push_pop);
     mu_run_test(test_destroy);
 
