@@ -1,0 +1,15 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module dsum ! in 
+    interface  ! in :dsum
+        subroutine dsum(b,a,n) ! in :dsum:dsum.f
+            double precision :: b
+            double precision dimension(n) :: a
+            integer optional,check(len(a)>=n),depend(a) :: n=len(a)
+        end subroutine dsum
+    end interface 
+end python module dsum
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
