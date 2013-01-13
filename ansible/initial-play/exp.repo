@@ -1,0 +1,5 @@
+[exp-ajdecon-org]
+enabled=1
+name=Adam DeConinck Test Repo
+baseurl=http://exp.ajdecon.org/repo/el6/
+gpgcheck=0

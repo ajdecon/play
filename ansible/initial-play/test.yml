@@ -1,0 +1,23 @@
+---
+- hosts: all
+  user: ec2-user
+  sudo: yes
+  tasks:
+  - name: create the munge user
+    action: user name=munge state=present
+  - name: exp repo
+    action: copy src=exp.repo dest=/etc/yum.repos.d/exp.repo
+  - name: install packages
+    action: yum name=$item state=installed
+    with_items:
+    - munge
+    - munge-libs
+    - slurm
+    - slurm-torque
+    #- openmpi
+  - name: check munge permissions
+    action: file path=/etc/munge owner=daemon group=daemon mode=0700 state=directory
+  - name: copy munge key
+    action: copy src=munge.key dest=/etc/munge/munge.key owner=daemon group=daemon mode=0600
+  - name: restart munge
+    action: service name=munge state=restarted
