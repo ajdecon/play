@@ -1,0 +1,17 @@
+euler : Solutions to Project Euler problems in Python and Fortran
+
+=================================================================
+
+I've been meaning to try out Project Euler problems for a while,
+and I've finally decided to make the time to work through some of 
+the problems. (Something to do while watching The Daily Show... 
+:-)
+
+I'm going to try to eventually do each of the solutions twice,
+in Python and Fortran. Why these languages? Python is probably
+my favorite language, I think most easily in it, but in my work
+in HPC I've been encountering a LOT of Fortran. I wrote quite a
+bit of Fortran in computational physics courses, but 
+I'd like to get better at it, so working these a second time seems 
+worthwhile. I might try to throw a few solutions in C as well, as
+that's another language I want more practice in.
